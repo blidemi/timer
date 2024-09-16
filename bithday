@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday</title>
+
+    <style>
+         body { 
+            background-color: rgb(107, 151, 67); 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 1080px; 
+        } 
+
+        .brdt { 
+            display: flex; 
+            width: 500px; 
+            margin: auto; 
+            justify-content: space-between; 
+            align-items: center; 
+        } 
+
+        h1 { 
+            font-size: 64px; 
+            margin: 0; 
+            padding: 0; 
+        } 
+
+        .brdt h1 { 
+            background: rgba(0, 0, 0, 0.3); 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+        } 
+
+        #text { 
+            display: none; 
+            font-size: 48px; 
+            background: rgba(0, 128, 0, 0.6); 
+            padding: 20px; 
+            border-radius: 12px; 
+            text-align: center; 
+            width: 100%; 
+        } 
+        
+    </style>
+</head>
+<body>
+     <div class="brdt">
+        <h1 id="days"></h1>
+        <h1 id="hours"></h1>
+        <h1 id="minutes"></h1>
+        <h1 id="seconds"></h1>
+    </div>
+
+
+
+    <script>
+        const days = document.getElementById('days');
+const hours = document.getElementById('hours');
+const minutes = document.getElementById('minutes');
+const seconds = document.getElementById('seconds');
+const brdt = document.querySelector('.brdt');
+let text = document.createElement('h1');
+const formatNum = num => num < 10 ? `0${num}` : num;
+let interval = setInterval (() => {
+    let date = new Date();
+    let ademi = new Date (2024, 9, 1);
+    days.textContent = formatNum( Math.floor((ademi.getTime() - date.getTime() )/1000 / 60 / 60 / 24 ));
+    hours.textContent = formatNum(Math.floor(((ademi.getTime() - date.getTime() )/1000 / 60 / 60) % 24 ));
+    minutes.textContent = formatNum (Math.floor(((ademi.getTime() - date.getTime() )/1000 / 60) % 60 ));
+    seconds.textContent = formatNum (Math.floor(((ademi.getTime() - date.getTime() )/1000)) % 60);
+    if(ademi <= date){
+        clearInterval(interval); 
+        days.textContent = 0;
+        hours.textContent = 0;
+        minutes.textContent = 0;
+        seconds.textContent = 0;
+        text.textContent = 'HAPPY BIRTHDAY!!!'
+        brdt.appendChild(text)
+    }
+}, 1000 )
+
+
+    </script>
+</body>
+</html>
